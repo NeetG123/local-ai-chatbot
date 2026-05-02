@@ -16,16 +16,16 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 import config
 
-_RAG_SYSTEM = (
-    "You are a helpful assistant. Answer the user's question using ONLY the "
-    "context below. If the context does not contain enough information, say "
-    "you don't know rather than guessing.\n\nContext:\n{context}"
+# Mistral (and many local models) only allow user/assistant roles — no system
+# role. Instructions are embedded in the human turn instead.
+_RAG_TEMPLATE = (
+    "Answer the question using ONLY the context below. "
+    "If the context does not contain enough information, say you don't know.\n\n"
+    "Context:\n{context}\n\n"
+    "Question: {question}"
 )
 
-_CHAT_SYSTEM = (
-    "You are a helpful, friendly assistant. Answer the user's question "
-    "concisely and accurately."
-)
+_CHAT_TEMPLATE = "{question}"
 
 
 def _make_llm() -> ChatOpenAI:
@@ -87,17 +87,15 @@ class RAGChatbot:
             context  = "\n\n---\n\n".join(d.page_content for d in docs)
             sources  = list({d.metadata.get("source", "unknown") for d in docs})
             prompt   = ChatPromptTemplate.from_messages([
-                ("system", _RAG_SYSTEM),
                 MessagesPlaceholder("history"),
-                ("human", "{question}"),
+                ("human", _RAG_TEMPLATE),
             ])
             chain_in = {"context": context, "history": self._recent_history(), "question": user_input}
         else:
             sources  = []
             prompt   = ChatPromptTemplate.from_messages([
-                ("system", _CHAT_SYSTEM),
                 MessagesPlaceholder("history"),
-                ("human", "{question}"),
+                ("human", _CHAT_TEMPLATE),
             ])
             chain_in = {"history": self._recent_history(), "question": user_input}
 

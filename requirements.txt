@@ -1,0 +1,40 @@
+# ── LLM / LangChain ──────────────────────────────────────────────
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.38
+langchain-chroma==0.1.4
+langchain-openai==0.1.22
+openai==1.40.0
+
+# ── Embeddings ───────────────────────────────────────────────────
+sentence-transformers==3.0.1
+# Install torch BEFORE running pip install -r requirements.txt:
+#   pip install torch==2.3.1+cpu torchvision==0.18.1+cpu --index-url https://download.pytorch.org/whl/cpu
+torch==2.3.1
+torchvision==0.18.1
+
+# ── Vector Store ─────────────────────────────────────────────────
+chromadb==0.5.3
+
+# ── Document Loaders ─────────────────────────────────────────────
+pypdf==4.3.1
+python-docx==1.1.2
+unstructured==0.15.0
+
+# ── Speech-to-Text ───────────────────────────────────────────────
+openai-whisper==20231117
+sounddevice==0.5.0
+scipy==1.14.0
+numpy==1.26.4
+
+# ── Text-to-Speech ───────────────────────────────────────────────
+pyttsx3==2.90
+# Coqui TTS (optional, higher quality — see voice.py for usage):
+# TTS==0.22.0
+
+# ── UI ───────────────────────────────────────────────────────────
+gradio==4.42.0
+
+# ── Utilities ────────────────────────────────────────────────────
+python-dotenv==1.0.1
+tqdm==4.66.5

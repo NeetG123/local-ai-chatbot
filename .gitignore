@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Runtime data (large / auto-generated — never commit these)
+vectorstore/
+audio_temp/*.wav
+models/
+
+# Sentence-transformers / HuggingFace cache
+.cache/
+
+# Environment / secrets
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
